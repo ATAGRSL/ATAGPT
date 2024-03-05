@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ATAGPT</title>
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32x32.png">
+
+    <!-- Scripts -->
+    <script src="assets/js/config.js" defer></script>
+    <script src="assets/js/chat.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/markdown-it@latest/dist/markdown-it.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.9.359/pdf.min.js"></script>
+    <script src="assets/js/jspdf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <!-- Avatar Images -->
+    <script>
+        const user_image = '<img src="assets/img/user.gif" alt="User Avatar">';
+        const gpt_image = '<img src="assets/img/ai.gif" alt="GPT Avatar">';
+    </script>
+
+    <!-- Unique Conversation ID -->
+    <script>
+        window.conversation_id = Array.from(crypto.getRandomValues(new Uint8Array(8)))
+            .map(n => n.toString(24).padStart(4, '0')).join('-');
+    </script>
+</head>
+
+<body>
+
+    <!-- Gradient Background -->
+    <div class="gradient"></div>
+    <!-- Main Content Row -->
+    <div class="row">
+        <!-- Conversations Box -->
+        <div class="box conversations">
+            <!-- Top Section of Conversations Box -->
+            <div class="top">
+                <!-- Button to Start a New Chat -->
+                <button class="new_convo" onclick="new_conversation()">
+                    <i class="far fa-plus"></i>
+                    <span>New chat</span>
+                    
+                </button>
+                
+            </div>
+            <button id="contentBtn" onclick="redirectTocontent()"> ✍️🤖AI DETECTOR</button>
+            
+            <!-- Bottom Buttons Section -->
+            <div class="bottom_buttons">
+                <!-- Button to Delete All Chats -->
+                <button onclick="delete_conversations()">
+                    <i class="fa-regular fa-trash-alt"></i>
+                    <span>Delete all chats</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Conversation Box -->
+        <div class="conversation">
+            <!-- Stop Generating Button -->
+            <div class="stop_generating stop_generating-hidden">
+                <!-- Button to Stop Generating Content -->
+                <button id="cancelButton">
+                    <span>Stop</span>
+                    <i class="fa-regular fa-x"></i>
+                </button>
+                <!-- Button to Scroll to Bottom of Messages -->
+                <button id="scrollToBottomBtn" class="scroll-btn">
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+            </div>
+
+            <!-- Messages Box -->
+            <div class="box" id="messages"></div>
+
+            <!-- Clear Chat Button -->
+            <button class="clear-button" onclick="clearMessages()">Clean Chat</button>
+
+            <!-- Print Button to Generate PDF from Messages -->
+            <button id="print-button">Print</button>
+
+            <!-- User Input Section -->
+            <div class="user-input">
+                <div class="box input-box">
+                    <!-- File Upload Section -->
+                    <div class="input-box">
+                        <label for="file-upload" class="file-label">
+                            <i class="fas fa-paperclip attachment-icon"></i>
+                        </label>
+                        <input type="file" id="file-upload" class="file-input" accept=".pdf" style="display: none;">
+                    </div>
+                    <!-- Textarea for User Input -->
+                    <textarea id="message-input" placeholder="Message ATAGPT..." style="white-space: pre-line;"></textarea>
+                    <!-- Send Button -->
+                    <div id="send-button">
+                        <i class="fas fa-arrow-up"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Model Selection and Theme Toggle Buttons -->
+            <div class="buttons">
+                <!-- Hamburger Menu Button for Sidebar with an alternative icon -->
+                <div class="mx-auto btn btn-square btn-ghost" id="toggleMenuBtn" onclick="toggleSidebar()">
+                    <i id="hamburger-icon" class="fas fa-chevron-right"></i>
+                </div>
+
+                <!-- Theme Toggle Switch -->
+                <div class="field" style="margin-left: 15px;">
+                    <label for="toggle-switch" style="justify-content: center;">
+                        <input type="checkbox" id="toggle-switch" name="toggle-switch" onclick="toggleTheme()" style="display: none;">
+                        <i class="fas fa-sun fa-xl" style="color: orange;" id="sun-icon"></i>
+                        <i class="fas fa-star-and-crescent fa-xl" style="color: lightgray;" id="moon-icon"></i>
+                    </label>
+                    <!-- Voice Input Button -->
+                    <a id="voiceInputButton" type="button" class="btn btn-outline-primary ml-2">
+                        <i id="voiceIcon" class="fas fa-microphone"></i>
+                    </a>
+
+                    <!-- Speech Icon -->
+                    <div class="speak-icon">
+                        <!-- Adding Icon and Reducing Size -->
+                        <i class="fas fa-volume-up fa-lg" onclick="speakText()"></i>
+                    </div>
+                    <!-- Clipboard Copy Icon -->
+                    <div class="clipboard-icon" onclick="copyToClipboard(this)">
+                        <i class="far fa-clipboard"></i>
+                    </div>
+                </div>
+
+                <!-- File Upload Section -->
+                <div id="file-upload-container">
+                    <input type="file" id="audioInput" accept="audio/*" />
+                    <label class="custom-file-label" for="audioInput">🎵 Select Audio</label>
+                    <!-- Button to Convert Speech to Text -->
+                    <button id="convertBtn" onclick="convertSpeechToText()">🎵 Upload Audio</button>
+                    <!-- Image File Upload Section -->
+                    <input type="file" id="fileInput" accept="image/*">
+                    <label class="custom-file-label" for="fileInput">🖼️ Select Image</label>
+                    <!-- Button to Perform OCR on Image -->
+                    <button id="convertBtn" onclick="performOCR()">🖼️ Upload Image</button>
+                    <!-- Button to Redirect to DALLE Image Converter -->
+                    <button id="createBtn" onclick="redirectToConverter()">🖼️ AI IMAGE</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile Sidebar -->
+    <div class="mobile-sidebar"></div>
+<script>
+
+
+</script>
+</body>
+
+</html>

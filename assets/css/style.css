@@ -1,0 +1,1106 @@
+/* Importing the Inter font from Google Fonts */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap");
+
+/* Root-level CSS variables for color scheme and styling */
+:root {
+    --colour-1: #ffffff;
+    --colour-2: #f7e6dd;
+    --colour-3: #1a1a1a;
+    --colour-4: #f0f0f0;
+    --colour-5: #181818;
+    --colour-6: #242424;
+
+    --accent: #424242;
+    --blur-bg: #f2f2f2;
+    --blur-border: #424242;
+    --user-input: #424242;
+    --conversations: #424242;
+
+    --font-1: "Inter", sans-serif;
+    --section-gap: 25px;
+    --border-radius-1: 8px;
+}
+/* Global CSS reset and styling for all elements */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    position: relative;
+    font-family: var(--font-1);
+}
+/* Basic styling for HTML and body */
+html,
+body {
+    scroll-behavior: smooth;
+    overflow: hidden;
+}
+
+body {
+    padding: var(--section-gap);
+    background: var(--colour-1);
+    color: var(--colour-3);
+    height: 100vh;
+    transition: background-color 0.5s ease-in-out;
+
+}
+/* Flex container styling for rows */
+.row {
+    display: flex;
+    gap: var(--section-gap);
+    height: 100%;
+}
+/* Basic styling for box elements with backdrop filter */
+.box {
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    background-color: var(--blur-bg);
+    height: 100%;
+    width: 100%;
+    border-radius: var(--border-radius-1);
+    border: 1px solid var(--blur-border);
+}
+/* Styling for the conversations section */
+.conversations {
+    max-width: 260px;
+    padding: var(--section-gap);
+    overflow: auto;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: background-color 0.5s ease-in-out;
+
+}
+/* Styling for individual conversation containers */
+.conversation {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+/* Styling for the messages within a conversation */
+.conversation #messages {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+    overflow-wrap: break-word;
+    padding-bottom: 50px;
+}
+/* Styling for the user input section in a conversation */
+.conversation .user-input {
+    max-height: 200px;
+    
+}
+/* Styling for the input field within the user input section */
+.conversation .user-input input {
+    font-size: 15px;
+    width: 100%;
+    height: 100%;
+    padding: 12px 15px;
+    background: none;
+    border: none;
+    outline: none;
+    color: var(--colour-3);
+}
+/* Styling for the placeholder text in the input field */
+.conversation .user-input input::placeholder {
+    color: var(--user-input)
+}
+/* Styling for the first child of the gradient class */
+.gradient:nth-child(1) {
+    --top: 0;
+    --right: 0;
+    --size: 70vw;
+    --blur: calc(0.5 * var(--size));
+    --opacity: 0.3;
+    animation: zoom_gradient 6s infinite;
+}
+/* Styling for the gradient class */
+.gradient {
+    position: absolute;
+    z-index: -1;
+    border-radius: calc(0.5 * var(--size));
+    background-color: var(--accent);
+    background: radial-gradient(circle at center, var(--accent), var(--accent));
+    width: 70vw;
+    height: 70vw;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+    filter: blur(calc(0.5 * 70vw)) opacity(var(--opacity));
+}
+/* Styling for the conversations section */
+.conversations {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+/* Styling for the title within the conversations section */
+.conversations .title {
+    font-size: 14px;
+    font-weight: 500;
+}
+/* Styling for individual conversation containers within the conversations section */
+.conversations .convo {
+    padding: 8px 12px;
+    display: flex;
+    gap: 18px;
+    align-items: center;
+    user-select: none;
+    justify-content: space-between;
+}
+/* Styling for the left section within an individual conversation container */
+.conversations .convo .left {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+/* Styling for icons within the conversations section */
+.conversations i {
+    color: var(--conversations);
+    cursor: pointer;
+}
+/* Styling for the conversation title */
+.convo-title {
+    color: var(--colour-3);
+    font-size: 14px;
+}
+/* Styling for the message container */
+.message {
+
+    width: 100%;
+    overflow-wrap: break-word;
+    display: flex;
+    gap: var(--section-gap);
+    padding: var(--section-gap);
+    padding-bottom: 0;
+}
+/* Animation for showing the last message */
+.message:last-child {
+    animation: 0.6s show_message;
+}
+
+@keyframes show_message {
+    from {
+        transform: translateY(10px);
+        opacity: 0;
+    }
+}
+/* Styling for the user section within a message */
+.message .user {
+    max-width: 7vh; 
+    max-height: 7vh; 
+    flex-shrink: 0;
+}
+/* Styling for the user image within a message */
+.message .user img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+    outline: 1px solid var(--blur-border);
+}
+/* Styling for the pseudo-element after the user section within a message */
+.message .user:after {
+    content: "63";
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    height: 65%; 
+    width: 65%; 
+    background: var(--colour-3);
+    filter: blur(10px) opacity(0.5);
+    z-index: 10000;
+}
+/* Styling for the content section within a message */
+.message .content {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    overflow-wrap: break-word;
+}
+/* Styling for paragraphs, list items, and code within the content section of a message */
+.message .content p,
+.message .content li,
+.message .content code {
+    font-size: 15px; 
+    line-height: 1.3;
+}
+/* Styling for icons within the user section of a message */
+.message .user i {
+    position: absolute;
+    bottom: -7px; 
+    right: -7px; 
+    z-index: 1000;
+}
+
+/* Styling for the new conversation container */
+.new_convo {
+    padding: 8px 12px;
+    display: flex;
+    gap: 18px;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+    background: transparent;
+    border: 1px dashed var(--conversations);
+    border-radius: var(--border-radius-1);
+}
+/* Styling for the text within the new conversation container */
+.new_convo span {
+    color: var(--colour-3);
+    font-size: 14px;
+}
+/* Hover effect for the new conversation container */
+.new_convo:hover {
+    border-style: solid;
+}
+/* Styling for the stop generating button */
+.stop_generating {
+    position: absolute;
+    bottom: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000000;
+}
+
+.stop_generating button {
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    background-color: var(--blur-bg);
+    border-radius: var(--border-radius-1);
+    border: 1px solid var(--blur-border);
+    padding: 10px 15px;
+    color: var(--colour-3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    animation: show_popup 0.4s;
+}
+/* Keyframes for showing the stop generating button */
+@keyframes show_popup {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+}
+/* Keyframes for hiding the stop generating button */
+@keyframes hide_popup {
+    to {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+}
+/* Animation class for hiding the stop generating button */
+.stop_generating-hiding button {
+    animation: hide_popup 0.4s;
+}
+/* Hidden state for the stop generating button */
+.stop_generating-hidden button {
+    display: none;
+}
+/* Styling for the typing indicator */
+.typing {
+    position: absolute;
+    top: -25px;
+    left: 0;
+    font-size: 14px;
+    animation: show_popup 0.4s;
+}
+/* Animation class for hiding the typing indicator */
+.typing-hiding {
+    animation: hide_popup 0.4s;
+}
+/* Hidden state for the typing indicator */
+.typing-hidden {
+    display: none;
+}
+/* Styling for checkbox input */
+input[type="checkbox"] {
+    height: 0;
+    width: 0;
+    display: none;
+}
+/* Styling for the label of the checkbox input */
+input:checked+label {
+    background: var(--blur-border);
+}
+/* Styling for the pseudo-element after the label of the checkbox input */
+input:checked+label:after {
+    left: calc(100% - 5px - 20px);
+}
+/* Styling for the buttons container */
+.buttons {
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    width: 100%;
+}
+/* Styling for the field container */
+.field {
+    height: fit-content;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    gap: 16px;
+    padding-right: 15px
+}
+/* Styling for the about text within the field container */
+.field .about {
+    font-size: 14px;
+    color: var(--colour-3);
+}
+
+/* Styling for the select element */
+select {
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    border-radius: 8px;
+
+    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px);
+
+    cursor: pointer;
+    background-color: var(--blur-bg);
+    border: 1px solid var(--blur-border);
+    color: var(--colour-3);
+    display: block;
+    position: relative;
+    overflow: hidden;
+    outline: none;
+    padding: 8px 16px;
+
+    appearance: none;
+}
+/* Styling for the input-box container */
+.input-box {
+    display: flex;
+    align-items: center;
+    padding-right: 15px;
+    cursor: pointer;
+    transition: background-color 0.5s ease-in-out;
+
+}
+
+/* Styling for the bottom buttons container */
+.bottom_buttons {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+/* Styling for the buttons within the bottom buttons container */
+.bottom_buttons button {
+    padding: 8px 12px;
+    display: flex;
+    gap: 18px;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+    background: transparent;
+    border: 1px solid #4285f4;
+    border-radius: var(--border-radius-1);
+    width: 100%;
+}
+/* Styling for the bottom buttons' text */
+.bottom_buttons button span {
+    color: var(--colour-3);
+    font-size: 14px;
+}
+/* Styling for the top section of the conversations container */
+.conversations .top {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    overflow: auto;
+}
+/* Styling for the cursor element */
+#cursor {
+    line-height: 17px;
+    margin-left: 3px;
+    -webkit-animation: blink 0.8s infinite;
+    animation: blink 0.8s infinite;
+    width: 7px;
+    height: 15px;
+}
+/* Keyframes for the blinking cursor */
+@keyframes blink {
+    0% {
+        background: #ffffff00;
+    }
+
+    50% {
+        background: white;
+    }
+
+    100% {
+        background: #ffffff00;
+    }
+}
+/* Webkit-specific keyframes for the blinking cursor */
+@-webkit-keyframes blink {
+    0% {
+        background: #ffffff00;
+    }
+
+    50% {
+        background: white;
+    }
+
+    100% {
+        background: #ffffff00;
+    }
+}
+
+/* Styling for ordered and unordered lists */
+ol,
+ul {
+    padding-left: 20px;
+}
+
+
+/* Styling for the reCAPTCHA badge */
+.grecaptcha-badge {
+    visibility: hidden;
+}
+/* Styling for the mobile sidebar */
+.mobile-sidebar {
+    display: none !important;
+    position: absolute;
+    z-index: 100000;
+    top: 0;
+    left: 0;
+    margin: 10px;
+    font-size: 20px;
+    cursor: pointer;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    background-color: var(--blur-bg);
+    border-radius: 10px;
+    border: 1px solid var(--blur-border);
+    width: 40px;
+    height: 40px;
+    justify-content: center;
+    align-items: center;
+    transition: 0.33s;
+}
+/* Styling for the icon within the mobile sidebar */
+.mobile-sidebar i {
+    transition: 0.33s;
+}
+/* Styling for the rotated state of the mobile sidebar */
+.rotated {
+    transform: rotate(360deg);
+}
+/* Styling for the conversations container on smaller screens */
+.conversations {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+/* Styling for the bottom buttons container on smaller screens */
+.bottom_buttons {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+/* Styling for the buttons within the bottom buttons container on smaller screens */
+.bottom_buttons button {
+    padding: 8px 12px;
+    display: flex;
+    gap: 18px;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+    background: transparent;
+    border: 1px solid #4285f4;
+    border-radius: var(--border-radius-1);
+    width: 100%;
+}
+/* Styling for the text within the buttons on smaller screens */
+.bottom_buttons button span {
+    color: var(--colour-3);
+    font-size: 14px;
+}
+/* Media query for screens with a maximum width of 990px */
+@media screen and (max-width: 990px) {
+    /* Hide the conversations container and set its width for smaller screens */
+    .conversations {
+        display: none;
+        width: 100%;
+        max-width: none;
+    }
+/* Adjust the alignment and wrapping of the buttons for smaller screens */
+    .buttons {
+        align-items: flex-start;
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+/* Adjust the width of the field container for smaller screens */
+    .field {
+        width: fit-content;
+     }
+/* Display the mobile sidebar for smaller screens */
+    .mobile-sidebar {
+        display: flex !important;
+    }
+}
+/* Media query for screens with a maximum height of 640px */
+@media screen and (max-height: 640px) {
+    /* Adjust the height of the body for smaller screens */
+    body {
+        height: 87vh
+    }
+}
+
+/* Class for showing elements */
+.shown {
+    display: flex;
+}
+
+/* Styling for hyperlinks */
+a:-webkit-any-link {
+    color: var(--accent);
+}
+/* Styling for the user-input textarea */
+.conversation .user-input textarea {
+    font-size: 15px;
+    width: 100%;
+    height: 100%;
+    padding: 24px 15px;
+    background: none;
+    border: none;
+    outline: none;
+    color: var(--colour-3);
+
+    resize: vertical;
+    max-height: 300px;
+    min-height: 60px;
+}
+
+/* Styling for the hljs copy */
+.hljs-copy-wrapper {
+    position: relative;
+    overflow: hidden;
+	color: #e9e9f4;
+    border-radius: var(--border-radius-1);
+    border: 1px solid var(--blur-border);
+    font-size: 15px;
+	white-space: pre-wrap;
+	word-break: break-all;
+	overflow-wrap: break-all;
+}
+/* Styling for the hljs copy on hover or focus */
+.hljs-copy-wrapper:hover .hljs-copy-button,
+.hljs-copy-button:focus {
+    transform: translateX(0)
+}
+/* Styling for the hljs copy button */
+.hljs-copy-button {
+    position: absolute;
+    transform: translateX(calc(100% + 1.125em));
+    top: 1em;
+    right: 1em;
+    width: 2rem;
+    height: 2rem;
+    text-indent: -9999px;
+    color: #fff;
+    border-radius: .25rem;
+    border: 1px solid #ffffff22;
+    background-color: #2d2b57;
+    background-image: url('data:image/svg+xml;utf-8,<svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M6 5C5.73478 5 5.48043 5.10536 5.29289 5.29289C5.10536 5.48043 5 5.73478 5 6V20C5 20.2652 5.10536 20.5196 5.29289 20.7071C5.48043 20.8946 5.73478 21 6 21H18C18.2652 21 18.5196 20.8946 18.7071 20.7071C18.8946 20.5196 19 20.2652 19 20V6C19 5.73478 18.8946 5.48043 18.7071 5.29289C18.5196 5.10536 18.2652 5 18 5H16C15.4477 5 15 4.55228 15 4C15 3.44772 15.4477 3 16 3H18C18.7956 3 19.5587 3.31607 20.1213 3.87868C20.6839 4.44129 21 5.20435 21 6V20C21 20.7957 20.6839 21.5587 20.1213 22.1213C19.5587 22.6839 18.7957 23 18 23H6C5.20435 23 4.44129 22.6839 3.87868 22.1213C3.31607 21.5587 3 20.7957 3 20V6C3 5.20435 3.31607 4.44129 3.87868 3.87868C4.44129 3.31607 5.20435 3 6 3H8C8.55228 3 9 3.44772 9 4C9 4.55228 8.55228 5 8 5H6Z" fill="white"/><path fill-rule="evenodd" clip-rule="evenodd" d="M7 3C7 1.89543 7.89543 1 9 1H15C16.1046 1 17 1.89543 17 3V5C17 6.10457 16.1046 7 15 7H9C7.89543 7 7 6.10457 7 5V3ZM15 3H9V5H15V3Z" fill="white"/></svg>');
+    background-repeat: no-repeat;
+    background-position: center;
+    transition: background-color 200ms ease, transform 200ms ease-out
+}
+/* Styling for the hljs copy button on hover */
+.hljs-copy-button:hover {
+    border-color: #ffffff44
+}
+/* Styling for the hljs copy button when active */
+.hljs-copy-button:active {
+    border-color: #ffffff66
+}
+/* Styling for the hljs copy button when copied */
+.hljs-copy-button[data-copied="true"] {
+    text-indent: 0;
+    width: auto;
+    background-image: none
+}
+/* Styling for reduced motion on hljs copy button */
+@media(prefers-reduced-motion) {
+    .hljs-copy-button {
+        transition: none
+    }
+}
+/* Styling for the hljs copy alert */
+.hljs-copy-alert {
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    height: 1px;
+    overflow: hidden;
+    position: absolute;
+    white-space: nowrap;
+    width: 1px
+}
+/* Styling for visually hidden elements */
+.visually-hidden {
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    height: 1px;
+    overflow: hidden;
+    position: absolute;
+    white-space: nowrap;
+    width: 1px;
+}
+
+/* Styling for the color picker fieldset */
+.color-picker>fieldset {
+    border: 0;
+    display: flex;
+    width: fit-content;
+    background: var(--colour-1);
+    margin-inline: auto;
+    border-radius: 8px;
+    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px);
+    cursor: pointer;
+    background-color: var(--blur-bg);
+    border: 1px solid var(--blur-border);
+    color: var(--colour-3);
+    display: block;
+    position: relative;
+    overflow: hidden;
+    outline: none;
+    padding: 6px 16px;
+}
+/* Styling for the message input */
+    #message-input {
+    margin-right: 10px;
+    height: 80px;
+    resize: none;
+    font-size: 16px;
+    transition: background-color 0.5s ease-in-out;
+
+
+}
+/* Styling for the scrollbar in the message input */
+    #message-input::-webkit-scrollbar {
+    width: 8px
+}
+
+/* Styling for the track of the scrollbar in the message input */
+    #message-input::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+}
+            
+      /* Styling for the handle of the scrollbar in the message input */
+    #message-input::-webkit-scrollbar-thumb {
+    background: #666464; 
+}
+
+/* Styling for the handle on hover in the scrollbar of the message input */
+    #message-input::-webkit-scrollbar-thumb:hover {
+    background: #9c9c9c; 
+}
+/* Styling for the checkbox input in the color picker */
+.color-picker input[type="checkbox"]:checked {
+  background-color: var(--radio-color);
+}
+
+  /* Styling for the icons */
+  .fas {
+    cursor: pointer;
+    font-size: 24px;
+  }
+  
+  /* Hide the moon icon initially */
+  #moon-icon {
+    display: none;
+  }
+/* Dark mode styles */
+.dark {
+    --colour-1: hsl(209 50% 10%);
+    --clr-card-bg: hsl(209 50% 5%);
+    --colour-3: hsl(209 50% 90%);
+    --conversations: hsl(209 50% 80%);
+	--blur-bg: hsl(209 60% 5%);
+}
+
+:root:has(#dark:checked) {
+    --colour-1: hsl(209 50% 10%);
+    --clr-card-bg: hsl(209 50% 5%);
+    --colour-3: hsl(209 50% 90%);
+    --conversations: hsl(209 50% 80%);
+	--blur-bg: hsl(209 60% 5%);
+}
+
+#messages {
+    border: 1px solid #424242;
+    padding: 10px;
+    margin: 10px;
+    transition: background-color 0.5s ease-in-out;
+
+}
+
+        /* Style for clear button */
+        .clear-button {
+            cursor: pointer;
+            position: absolute;
+            top: 10px;
+            right: -8px;
+            padding: 8px;
+            background-color: var(--colour-3);
+            color: var(--colour-1);
+            border: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .clear-button:hover {
+            background-color: var(--colour-1);
+            color: var(--colour-3);
+        }
+#messages {
+    position: relative;
+    /* Other features */
+}
+
+.bottom_buttons {
+    cursor: pointer;
+    padding: 8px;
+    border: none;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.bottom_buttons i {
+    font-size: 20px;
+    margin-right: 8px;
+}
+
+.bottom_buttons span {
+    font-size: 14px;
+}
+
+.bottom_buttons:hover {
+    background-color: var(--colour-1);
+    color: var(--colour-3);
+}
+/* Styling for send button */
+#send-button {
+    cursor: pointer;
+    padding: 8px;
+    border: none;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    position: relative;
+    pointer-events: none; /* Disables interaction initially */
+    opacity: 0.5; /* Initial low opacity */
+}
+
+#send-button i {
+    font-size: 20px;
+    transition: transform 0.3s ease;
+    border: 1px solid currentColor; /* Makes the border color match the color of the icon */
+    padding: 5px;
+    border-radius: 5px;
+}
+
+
+
+#send-button:hover {
+    background-color: var(--colour-1);
+    color: var(--colour-3);
+}
+
+#send-button:hover i {
+    transform: scale(1.2); /* Change to your desired hover effect on the icon */
+}
+
+#message-input:not(:placeholder-shown) + #send-button {
+    pointer-events: auto; /* Enables interaction if the placeholder is not shown */
+    opacity: 1; /* Reset opacity to normal */
+}
+
+
+/* Styling for file upload */
+.file-label {
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+    padding: 12px 15px;
+    transition: border-color 0.3s ease;
+  }
+
+
+
+  .attachment-icon {
+    width: 30px;
+    height: 30px;
+  }
+
+  .file-input {
+    display: none;
+  }
+
+  #hamburger-icon {
+    transition: transform 0.3s ease-in-out;
+}
+
+#toggleMenuBtn.active #hamburger-icon {
+    transform: rotate(180deg);
+}
+.file-label {
+    display: block;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.file-label:hover {
+    background-color: var(--colour-1);
+    color: var(--colour-3);
+}
+
+.attachment-icon {
+    transition: transform 0.3s ease-in-out;
+}
+
+.file-label:hover .attachment-icon {
+    transform: scale(1.2); /* Change to your desired hover effect on the icon */
+}
+/* Add this CSS to style your "Print" button */
+#print-button {
+    position: absolute;
+    left: 10px; /* Adjust the right distance */
+    top: 10px;
+    padding: 8px;
+    background-color: var(--colour-3);
+    color: var(--colour-1);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+#print-button:hover {
+    background-color: var(--colour-1);
+    color: var(--colour-3);
+}
+
+#print-button:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(66, 133, 244, 0.3); /* Optional focus style */
+}
+
+
+.scroll-btn i {
+    font-size: 18px;
+    color: var(--colour-3);
+}
+
+/* Style for the button/icon on hover */
+.scroll-btn:hover {
+    background-color: var(--colour-3);
+    color: var(--colour-1);
+}
+.mobile-sidebar {
+    display: none !important;
+}
+
+
+
+.file-upload-btn-wrapper {
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+}
+
+/* Styling for file upload button */
+.file-upload-btn {
+    border: 2px solid gray;
+    color: gray;
+    background-color: white;
+    padding: 6px 15px; /* Adjust for smaller size */
+    border-radius: 6px;
+    font-size: 14px; /* Adjust for smaller size */
+    font-weight: bold;
+}
+/* Styling for file input */
+.file-input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    font-size: 18px; /* Adjust for smaller size */
+    cursor: pointer;
+    opacity: 0;
+}
+
+/* Style for audio input (#audioInput) */
+#audioInput {
+    display: none;
+}
+
+/* Styling for custom file label */
+.custom-file-label {
+    background-color: #3498db;
+    color: #fff;
+    padding: 3px 7px; /* Adjust for smaller size */
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9rem; /* Adjust for smaller size */
+    transition: background-color 0.3s;
+}
+
+.custom-file-label:hover {
+    background-color: #2980b9; /* New color on hover */
+}
+/* Styling for convert button */
+#convertBtn {
+    background-color: #4caf50;
+    color: white;
+    padding: 3px 7px; /* Adjust for smaller size */
+    border: none;
+    border-radius: 5px;
+    font-size: 0.9rem; /* Adjust for smaller size */
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#convertBtn:hover {
+    background-color: #45a049;
+}
+
+/* Styling for clipboard icon */
+.clipboard-icon i {
+    font-size: 22px; /* Adjust size as needed */
+    cursor: pointer;
+    color: #3498db; /* Icon color */
+}
+
+.clipboard-icon i:hover {
+    color: #2980b9; /* New color on hover */
+}
+/* Button appearance */
+.btn {
+    display: inline-block;
+    font-weight: 400;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    user-select: none;
+    border: 1px solid transparent;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: 0.25rem;
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s, box-shadow 0.3s;
+}
+
+/* Button color */
+.btn-outline-primary {
+    color: #3498db;
+    background-color: transparent;
+    background-image: none;
+}
+
+/* Button color on hover */
+.btn-outline-primary:hover {
+    color: #fff;
+    background-color: #3498db;
+}
+
+/* Styling for speak icon */
+.speak-icon i {
+    font-size: 24px; /* Icon size */
+    color: #2ecc71; /* Icon color */
+    cursor: pointer;
+    transition: color 0.3s; /* Color change on hover */
+}
+
+.speak-icon i:hover {
+    color: #27ae60; /* New color on hover */
+}
+       /* Styling for theme change icons */
+        .fa-xl {
+            font-size: 2em; /* Icon size */
+            cursor: pointer;
+        }
+
+        /* Color change on hover for theme change icons */
+        .fa-xl:hover {
+            opacity: 0.7;
+        }
+/* Hide file input */
+        #fileInput {
+            display: none;
+        }
+        
+/* Styling for create button */
+        #createBtn {
+            background-color: #3498db;
+            color: white;
+            padding: 7px 10px;
+            font-size: 15px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+        }
+
+        #createBtn:hover {
+            background-color: #2980b9;
+        }
+
+/* Styling for convert button */
+#contentBtn {
+    background-color: #4caf50;
+    color: white;
+    padding: 3px 7px; /* Adjust for smaller size */
+    border: none;
+    border-radius: 5px;
+    font-size: 0.9rem; /* Adjust for smaller size */
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#contentBtn:hover {
+    background-color: #45a049;
+}
+
+
+/* CSS rules for button animation */
+@keyframes buttonAnimation {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+/* CSS rules for button */
+button {
+    padding: 10px 15px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: transform 0.3s ease; /* Smooth animation */
+}
+
+/* Start animation on button click */
+button:active {
+    animation: buttonAnimation 0.5s ease;
+}
+
+
