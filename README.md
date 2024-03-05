@@ -1,4 +1,6 @@
+![atagpt](https://github.com/ATAGRSL/ATAGPT/assets/122121578/04baefe3-3c58-415c-9263-9382b0bc7050)
 Bu proje, OpenAI altyapısını kullanarak geliştirilen bir yapay zeka chat botunu tanıtmaktadır. Bu chat botu, kullanıcıların metin tabanlı olarak etkileşim kurabileceği bir arayüz sunar. Ayrıca, çeşitli özelliklerle donatılmıştır, bu özelliklerin amacı kullanıcı deneyimini geliştirmek ve daha işlevsel hale getirmektir.
+
 Özellikler:
 a. Yeni Chat Açma: Kullanıcıların yeni bir sohbet başlatmasına izin verir.
 
